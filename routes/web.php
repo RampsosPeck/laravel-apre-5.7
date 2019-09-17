@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', function () {
+	$nombre = "Jorge";
+    return view('home',compact('nombre'));
+});*/
+
+Route::view('/','home')->name('home');
+Route::view('/about','about')->name('about');
+Route::view('/portfolio','portfolio')->name('portfolio');
+Route::view('/contact','contact')->name('contact');
