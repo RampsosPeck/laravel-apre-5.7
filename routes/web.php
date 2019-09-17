@@ -11,6 +11,7 @@
 |
 */
 
+
 /*Route::get('/', function () {
 	$nombre = "Jorge";
     return view('home',compact('nombre'));
@@ -18,5 +19,7 @@
 
 Route::view('/','home')->name('home');
 Route::view('/about','about')->name('about');
-Route::view('/portfolio','portfolio')->name('portfolio');
+Route::get('/portfolio','PortfolioController@index')->name('portfolio');
 Route::view('/contact','contact')->name('contact');
+
+Route::post('contact','MessagesController@store');
