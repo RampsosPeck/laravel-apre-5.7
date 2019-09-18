@@ -3,8 +3,10 @@
 namespace Laravelapre\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Laravelapre\Mail\MessageRecieved;
 
-class MessagesController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +36,7 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $message = request()->validate([
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
@@ -43,7 +45,10 @@ class MessagesController extends Controller
             'name.required' => __('I need your name')
         ]);
 
-        return 'Datos validados';
+        //Mail::to('jorge@gmail.com')->send(new MessageRecieved($message));
+        Mail::to('jorge@gmail.com')->queue(new MessageRecieved($message));
+
+       return back()->with('status','Recivimos tu mensaje te responderemos pronto');
     }
 
     /**
